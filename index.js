@@ -1,6 +1,12 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+const Manager = require('./lib/manager');
+const Intern = require('./lib/intern');
+const Engineer = require('./lib/engineer');
+
+const teamArray = []
+
 const questionsTeamManager = [
     {
         type: 'input',
@@ -79,24 +85,54 @@ const questionsIntern = [
     },
 ]
 
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, (err) =>
-    err ? console.log(err) : console.log('Successfully created README!'))
+// function writeToFile(fileName, data) {
+//     fs.writeFile(fileName, data, (err) =>
+//     err ? console.log(err) : console.log('Successfully created README!'))
+// },
+
+const addManager = () => {
+    inquirer.prompt (questionsTeamManager)
+    .then((data) => {
+        const { name, id, email, officeNumber } = data;
+        const manager = new Manager (name, id, email, officeNumber);
+        teamArray.push(manager);
+        addEmployee();
+    })
+};
+
+const addEmployee = () => {
+    inquirer.prompt (nextStepList)
+    .then((data) => {
+        if (data.nextStep==="Add an engineer") {
+            addEngineer();
+        } else if (data.nextStep==="Add an intern") {
+            addIntern();
+        } else {
+            console.log("We're done")
+            console.log(teamArray);
+        }
+    }
+    )
 }
 
-function init() {
-    inquirer
-        .prompt(questionsTeamManager)
-        .then(
-            inquirer
-                .prompt(nextStepList)
-                .then((data) => {
-                    if (data.nextStep==="Add an engineer") {
-                        
-                    }
-                }
-                )
-        )
+const addIntern = () => {
+    inquirer.prompt(questionsIntern)
+    .then((data) => {
+        const { name, id, email, school } = data;
+        const intern = new Intern (name, id, email, school);
+        teamArray.push(intern);
+        addEmployee();
+    })
 }
 
-init();
+const addEngineer = () => {
+    inquirer.prompt(questionsEngineer)
+    .then((data) => {
+        const { name, id, email, github } = data;
+        const engineer = new Engineer (name, id, email, github);
+        teamArray.push(engineer);
+        addEmployee();
+    })
+}
+
+addManager();
