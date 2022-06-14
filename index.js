@@ -159,13 +159,14 @@ const writeFile = data => {
     })
 }
 
+
 addManager()
     .then(teamArray => {
         return renderHTML(teamArray);
     })
-    // .then(returnedHTML => {
-    //     return writeFile(returnedHTML);
-    // })
-    // .catch(err => {
-    //     console.log(err);
-    // });
+    .then(returnedHTML => {
+        return writeFile(returnedHTML);
+    })
+    .catch(err => {
+        console.log(err);
+    });

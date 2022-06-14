@@ -86,7 +86,7 @@ renderHTML = (data) => {
     const teamCards = cardArray.join('');
 
     const generateTeamPage = generateFinalPage(teamCards)
-    return console.log(generateTeamPage);
+    return generateTeamPage;
 }
 
 const generateFinalPage = function(teamCards) {
