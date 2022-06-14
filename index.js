@@ -5,6 +5,8 @@ const Manager = require('./lib/manager');
 const Intern = require('./lib/intern');
 const Engineer = require('./lib/engineer');
 
+const generateHTML = require('./src/generateHTML');
+
 const teamArray = []
 
 const questionsTeamManager = [
@@ -91,48 +93,79 @@ const questionsIntern = [
 // },
 
 const addManager = () => {
-    inquirer.prompt (questionsTeamManager)
+    return inquirer.prompt (questionsTeamManager)
     .then((data) => {
         const { name, id, email, officeNumber } = data;
         const manager = new Manager (name, id, email, officeNumber);
         teamArray.push(manager);
-        addEmployee();
+        return addEmployee();
     })
 };
 
 const addEmployee = () => {
-    inquirer.prompt (nextStepList)
+    return inquirer.prompt (nextStepList)
     .then((data) => {
         if (data.nextStep==="Add an engineer") {
-            addEngineer();
+            return addEngineer();
         } else if (data.nextStep==="Add an intern") {
-            addIntern();
+            return addIntern();
         } else {
-            console.log("We're done")
-            console.log(teamArray);
+            console.log("Finishing your team and generating HTML")
+            return (teamArray);
         }
     }
     )
 }
 
 const addIntern = () => {
-    inquirer.prompt(questionsIntern)
+    console.log(`
+    -------------------------
+    Adding Intern to the Team
+    -------------------------
+    `);
+    
+    return inquirer.prompt(questionsIntern)
     .then((data) => {
         const { name, id, email, school } = data;
         const intern = new Intern (name, id, email, school);
         teamArray.push(intern);
-        addEmployee();
+        return addEmployee();
     })
 }
 
 const addEngineer = () => {
-    inquirer.prompt(questionsEngineer)
+    console.log(`
+    -------------------------
+    Adding Engineer to the Team
+    -------------------------
+    `);
+    return inquirer.prompt(questionsEngineer)
     .then((data) => {
         const { name, id, email, github } = data;
         const engineer = new Engineer (name, id, email, github);
         teamArray.push(engineer);
-        addEmployee();
+        return addEmployee();
     })
 }
 
-addManager();
+const writeFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log("Your new team profile has been created! Please view the index.html in the dist folder.")
+        }
+    })
+}
+
+addManager()
+    .then(teamArray => {
+        return renderHTML(teamArray);
+    })
+    // .then(returnedHTML => {
+    //     return writeFile(returnedHTML);
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    // });
