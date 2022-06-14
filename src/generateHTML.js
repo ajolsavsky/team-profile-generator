@@ -34,7 +34,7 @@ const generateIntern = function (intern) {
         <div class="card-body bg-info pt-5 pb-5">
             <ul class="list-group list-group-flush">
             <li class="list-group-item">ID: ${intern.id}</li>
-            <li class="list-group-item">Email: <a href="${intern.email}?subject=Web%20Inquiry">${intern.email}</a></li>
+            <li class="list-group-item">Email: <a href="mailto:${intern.email}?subject=Web%20Inquiry">${intern.email}</a></li>
             <li class="list-group-item">School: ${intern.school}</li>
             </ul>
         </div>
@@ -53,7 +53,7 @@ const generateEngineer = function (engineer) {
         <div class="card-body bg-info pt-5 pb-5">
             <ul class="list-group list-group-flush">
             <li class="list-group-item">ID: ${engineer.id}</li>
-            <li class="list-group-item">Email: <a href="${engineer.email}?subject=Web%20Inquiry">${engineer.email}</a></li>
+            <li class="list-group-item">Email: <a href="mailto:${engineer.email}?subject=Web%20Inquiry">${engineer.email}</a></li>
             <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></li>
             </ul>
         </div>
