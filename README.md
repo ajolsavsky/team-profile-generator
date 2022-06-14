@@ -16,7 +16,9 @@
   The user should clone the repository from GitHub and have Node.js installed. Be sure to run npm install against the dependancies foldder to enable inquirer.
   
   ## Usage
-  Use inquirer from your command line to answer questions about your team. You can [view the walkthrough video here](https://drive.google.com/file/d/11hQw-19FvViLY8L0B3taqeyrO4nJZfhp/view?usp=sharing).
+  Use inquirer from your command line to answer questions about your team. You can [view the walkthrough video here](https://drive.google.com/file/d/1LnwxjYPICsgGgMd9oDsVMLAnx3MBV5or/view?usp=sharing).
+
+  ![screenshot of finished page](./Assets/AppScreenshot.png)
   
   ## License
   Read more about MIT here: [MIT](https://opensource.org/licenses/MIT)
