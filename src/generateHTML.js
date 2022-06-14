@@ -3,7 +3,6 @@
 const generateManager = function (manager) {
     return `
     <!-- Manager Card -->
-
     <div class="shadow-lg card mb-2" style="width: 18rem;">
         <div class="card-body">
           <h3 class="card-title">${manager.name}</h3>
@@ -43,6 +42,25 @@ const generateIntern = function (intern) {
     `;
 }
 
+const generateEngineer = function (engineer) {
+    return `
+    <!-- Engineer Card -->
+        <div class="shadow-lg card mb-2" style="width: 18rem;">
+        <div class="card-body">
+          <h3 class="card-title">${engineer.name}</h3>
+            <h5><span class="material-symbols-outlined"> engineering</span> Engineer</h5>
+        </div>
+        <div class="card-body bg-info pt-5 pb-5">
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: ${engineer.id}</li>
+            <li class="list-group-item">Email: <a href="${engineer.email}?subject=Web%20Inquiry">${engineer.email}</a></li>
+            <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></li>
+            </ul>
+        </div>
+      </div>
+    `;
+}
+
 renderHTML = (data) => {
     cardArray = [];
 
@@ -58,6 +76,10 @@ renderHTML = (data) => {
             const internCard = generateIntern(employee);
 
             cardArray.push(internCard);
+        } else if (role === 'Engineer') {
+            const engineerCard = generateEngineer(employee);
+
+            cardArray.push(engineerCard);
         }
     }
 
